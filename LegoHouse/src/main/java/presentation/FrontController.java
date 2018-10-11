@@ -5,6 +5,8 @@
  */
 package presentation;
 
+import data.DAO;
+import data.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -12,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import logic.HTMLGenerator;
 
 /**
  *
@@ -19,6 +22,12 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "FrontController", urlPatterns = {"/FrontController"})
 public class FrontController extends HttpServlet {
+
+    private DAO dao;
+
+    public FrontController() {
+        this.dao = new DAO();
+    }
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,20 +42,58 @@ public class FrontController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet FrontController</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet FrontController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            String origin = request.getParameter("origin");
+            generateMenu(request);
+            if (origin != null) {
+                switch (origin) {
+                    case "index":
+                        generateMenu(request);
+                        request.getRequestDispatcher("index.jsp").forward(request, response);
+                        break;
+                    case "login":
+                        generateMenu(request);
+                        request.getRequestDispatcher("loginpage.jsp").forward(request, response);
+                        break;
+                    case "signup":
+                        generateMenu(request);
+                        request.getRequestDispatcher("registerpage.jsp").forward(request, response);
+                        break;
+                    case "create user":
+                        String email = request.getParameter("email");
+                        String password = request.getParameter("password");
+                        
+                        User user = new User(email, password);
+                        dao.createUser(user);
+                        generateMenu(request);
+                        request.getRequestDispatcher("index.jsp").forward(request, response);
+                        break;
+                    case "logout":
+                        request.getSession(false).invalidate();
+                        generateMenu(request);
+                        request.getRequestDispatcher("login.jsp").forward(request, response);
+                        break;
+                    default:
+                        request.getRequestDispatcher("index.jsp").forward(request, response);
+                        break;
+                }
+            } else {
+                generateMenu(request);
+                request.getRequestDispatcher("index.jsp").forward(request, response);
+            }
+
         }
+
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    private void generateMenu(HttpServletRequest request) {
+        HTMLGenerator html = new HTMLGenerator();
+        String menu = html.generateMenu(request);
+//        String menu = html.testmenu();
+
+        request.setAttribute("menu", menu);
+    }
+
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *

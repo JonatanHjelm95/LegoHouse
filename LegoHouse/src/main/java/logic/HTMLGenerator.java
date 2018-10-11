@@ -23,31 +23,31 @@ public class HTMLGenerator {
             + "        </div>";
 
     public String generateMenu(HttpServletRequest request) {
-        String menuHTML = "";
         User user = null;
         if (request.getSession(false) != null) {
             try {
                 user = (User) request.getSession(false).getAttribute("user");
-                menuHTML = "<div class=\"topnav\">\n"
+                return "<div class=\"topnav\">\n"
                         + "<a id=\"login\" href=\"?origin=logout\">logout</a>"
                         + "<h4 id=\"user\" > Logged in as: " + user.getEmail() + "</h4>\n"
                         + "<h1 id=\"header\" >Lego house</h1>\n"
                         + "<a id=\"home\" class=\"active\" href=\"?origin=index\">Home</a>\n"
                         + "<a id=\"products\" href=\"?origin=products\">Products</a>\n"
                         + "</div>";
-                return menuHTML;
             } catch (NullPointerException ne) {
                 ne.printStackTrace();
             }
         }
-        menuHTML = "<div class=\"topnav\">\n"
+        return "<div class=\"topnav\">\n"
                 + "            <a id=\"login\" href=\"?origin=signup\">sign up</a>\n"
                 + "            <a id=\"login\" href=\"?origin=login\">Login</a>\n"
                 + "            <h1 id=\"header\" >Lego house</h1>\n"
                 + "            <a id=\"home\" class=\"active\" href=\"?origin=index\">Home</a>\n"
                 + "            <a id=\"products\" href=\"?origin=products\">Products</a>\n"
                 + "        </div>";
-        return menuHTML;
     }
 
+    public String testmenu(){
+        return html;
+    }
 }
