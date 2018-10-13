@@ -14,7 +14,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import logic.HTMLGenerator;
+import logic.LoginFacade;
 
 /**
  *
@@ -59,11 +61,7 @@ public class FrontController extends HttpServlet {
                         request.getRequestDispatcher("registerpage.jsp").forward(request, response);
                         break;
                     case "create user":
-                        String email = request.getParameter("email");
-                        String password = request.getParameter("password");
-                        
-                        User user = new User(email, password);
-                        dao.createUser(user);
+                        createUser(request);
                         generateMenu(request);
                         request.getRequestDispatcher("index.jsp").forward(request, response);
                         break;
@@ -72,6 +70,15 @@ public class FrontController extends HttpServlet {
                         generateMenu(request);
                         request.getRequestDispatcher("login.jsp").forward(request, response);
                         break;
+                    case "validate user":
+                        LoginFacade lf = new LoginFacade();
+                        String email = request.getParameter("email");
+                        String password = request.getParameter("password");
+                        User user = lf.userLogin(email, password);
+                        HttpSession session = request.getSession(true);
+                        session.setAttribute("user", user);
+                        generateMenu(request);
+                        request.getRequestDispatcher("index.jsp").forward(request, response);
                     default:
                         request.getRequestDispatcher("index.jsp").forward(request, response);
                         break;
@@ -83,6 +90,13 @@ public class FrontController extends HttpServlet {
 
         }
 
+    }
+
+    private void createUser(HttpServletRequest request) {
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        User user = new User(email, password);
+        dao.createUser(user);
     }
 
     private void generateMenu(HttpServletRequest request) {

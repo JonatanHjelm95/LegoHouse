@@ -22,12 +22,12 @@
         <%=request.getAttribute("menu")%>
 
         <form name="login" action="FrontController" method="POST">
-            <input type="hidden" name="origin" value="login">
+            <input type="hidden" name="origin" value="validate user">
             Email:<br>
-            <input type="text" name="email" value="someone@nowhere.com">
+            <input type="text" name="email" placeholder="email">
             <br>
             Password:<br>
-            <input type="password" name="password" value="sesam">
+            <input type="password" name="password" placeholder="password">
             <br>
             <input type="submit" value="Submit">
         </form>

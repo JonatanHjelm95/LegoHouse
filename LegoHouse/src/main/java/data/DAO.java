@@ -18,7 +18,7 @@ import java.sql.Statement;
 public class DAO {
 
     private static final String NEW_USER = "INSERT INTO user (email, password) VALUES (?, ?)";
-    private static final String USER_LOGIN = "SELECT id, role FROM user WHERE email=? AND password=?";
+    private static final String USER_LOGIN = "SELECT id FROM user WHERE email=? AND password=?";
 
     public void createUser(User user) {
         try {
@@ -37,7 +37,7 @@ public class DAO {
         }
     }
 
-    public static User login(String email, String password) {
+    public User login(String email, String password) {
         try {
             Connection con = Connector.connection();
             PreparedStatement ps = con.prepareStatement(USER_LOGIN);
