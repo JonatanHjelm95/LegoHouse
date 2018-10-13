@@ -18,7 +18,8 @@ import java.sql.Statement;
 public class DAO {
 
     private static final String NEW_USER = "INSERT INTO user (email, password) VALUES (?, ?)";
-    private static final String USER_LOGIN = "SELECT id FROM user WHERE email=? AND password=?";
+    private static final String USER_LOGIN = "SELECT * FROM user WHERE email=? AND password=?";
+    private static final String GET_USER = "SELECT * FROM LegoDB.user where email =?;";
 
     public void createUser(User user) {
         try {
@@ -45,11 +46,14 @@ public class DAO {
             ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                String role = rs.getString("role");
                 int id = rs.getInt("id");
-                User user = new User(email, password);
-                user.setId(id);
-                return user;
+                String em = rs.getString("email");
+                String pwrd = rs.getString("password");
+                if (email.equals(em) && password.equals(pwrd)) {
+                    User user = new User(email, password);
+                    user.setId(id);
+                    return user;
+                }
             }
         } catch (ClassNotFoundException | SQLException ex) {
             ex.printStackTrace();

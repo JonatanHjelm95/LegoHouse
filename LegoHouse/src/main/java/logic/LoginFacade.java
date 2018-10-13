@@ -22,7 +22,6 @@ public class LoginFacade {
     }
 
     public LoginFacade() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
     public User userLogin(String email, String password){

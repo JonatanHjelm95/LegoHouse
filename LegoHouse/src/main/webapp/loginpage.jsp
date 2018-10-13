@@ -21,7 +21,7 @@
     <body>
         <%=request.getAttribute("menu")%>
 
-        <form name="login" action="FrontController" method="POST">
+        <form action="FrontController" method="POST">
             <input type="hidden" name="origin" value="validate user">
             Email:<br>
             <input type="text" name="email" placeholder="email">
