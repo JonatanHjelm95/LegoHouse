@@ -14,77 +14,43 @@ import java.util.ArrayList;
  */
 public class LegoLogic {
 
-//    public Brick[] createRow(Boolean isEven, int length) { //minimum length = 2
-////        SideRow row = new SideRow(isEven, length);
-////        Brick[] bricks = row.getBricks();
-//////        if (isEven) {
-////            for (int i = 0; i < row.getLength(); i++) {
-////                
-//////                while (row.getCurrentRowLength(bricks) < row.getLength()) {
-////                    switch (i) {
-////                        case 0:
-////                            if (row.getLength() > 2) {
-////                                bricks[i] = new Brick(2);
-////                            } else {
-////                                bricks[i] = new Brick(4);
-////                            }
-////                            break;
-//////                        case 1:
-//////                            bricks[i] = new Brick(4);
-//////                            break;
-////                        default:
-////                            if (bricks[i - 1].getLength() == 2 ) {
-////                                bricks[i] = new Brick(4);
-////                            }
-////                            if (bricks[i - 1].getLength() == 4 ) {
-////                                bricks[i] = new Brick(2);
-////                            }
-////                            break;
-////                    }
-//////                }
-////
-////            }
-////            return bricks;
-////        }
-////        return null;
-////    }
     public Brick[] createRow(boolean isEven, int length) {
         int brickAmount = getBrickAmount(isEven, length);
         int modu = length % 3;
         try {
 
             Brick[] row = new Brick[brickAmount];
-            if (isEven) {
-                setEvenBrickRow(row);
-            } else {
-                setUnevenBrickRow(row);
-            }
+            setBrickRow(row);
+
             return row;
         } catch (Exception e) {
             throw new NullPointerException();
         }
     }
 
-    private void setUnevenBrickRow(Brick[] row) {
-        for (int i = 0; i < row.length; i++) {
-            switch (i) {
-                case 0:
-                    row[i] = new Brick(0);
-                    break;
-                case 1:
-                    row[i] = new Brick(2);
-                    break;
-                default:
-                    if (row[i - 1].getLength() == 2) {
-                        row[i] = new Brick(4);
-                    } else {
-                        row[i] = new Brick(2);
-                    }
+    public ArrayList<Wall> createHouse(int height, int lenX, int lenY) {
+        //wall 1
+        ArrayList<Wall> walls = new ArrayList<Wall>();
+        try {
+            ArrayList<Brick[]> wall1 = new ArrayList<Brick[]>();
+            for (int i = 0; i < height; i++) {
+                if (i % 2 == 0) {
+                    wall1.add(createRow(true, lenX));
+                } else {
+                    wall1.add(createRow(false, lenX));
+                }
+                Wall wall_1 = new Wall(wall1);
+                walls.add(wall_1);
+                return walls;
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
+        return null;
     }
 
-    private void setEvenBrickRow(Brick[] row) {
+    private void setBrickRow(Brick[] row) {
         for (int i = 0; i < row.length; i++) {
             switch (i) {
                 case 0:

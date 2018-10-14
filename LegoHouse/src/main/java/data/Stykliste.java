@@ -12,13 +12,13 @@ import java.util.ArrayList;
  * @author Jonatan
  */
 public class Stykliste {
-    private ArrayList<SideRow> rows;
+    private ArrayList<Wall> walls;
 
-    public ArrayList<SideRow> getRows() {
-        return rows;
+    public ArrayList<Wall> getWalls() {
+        return walls;
     }
 
-    public void setRows(ArrayList<SideRow> rows) {
-        this.rows = rows;
+    public void setWalls(ArrayList<Wall> rows) {
+        this.walls = walls;
     }
 }
