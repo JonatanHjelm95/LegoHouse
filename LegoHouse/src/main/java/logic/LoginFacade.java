@@ -27,4 +27,11 @@ public class LoginFacade {
     public User userLogin(String email, String password){
         return dao.login(email, password);
     }
+    
+    public User getUser(String email) throws Exception{
+        return dao.getUser(email);
+    }
+    public void createUser(User user){
+        dao.createUser(user);
+    }
 }

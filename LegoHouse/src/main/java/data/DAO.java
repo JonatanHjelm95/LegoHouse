@@ -61,4 +61,25 @@ public class DAO {
         return null;
     }
 
+    public User getUser(String email) throws Exception {
+        try {
+            Connection con = Connector.connection();
+            PreparedStatement ps = con.prepareStatement(GET_USER);
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int id = rs.getInt("id");
+                String em = rs.getString("email");
+                String pwrd = rs.getString("password");
+                User user = new User(em, pwrd);
+                user.setId(id);
+                return user;
+            } else {
+                throw new Exception("That user doesn't exist");
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
 }

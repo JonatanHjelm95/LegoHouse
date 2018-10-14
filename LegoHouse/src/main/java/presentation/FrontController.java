@@ -25,10 +25,10 @@ import logic.LoginFacade;
 @WebServlet(name = "FrontController", urlPatterns = {"/FrontController"})
 public class FrontController extends HttpServlet {
 
-    private DAO dao;
+   private LoginFacade lf; 
 
     public FrontController() {
-        this.dao = new DAO();
+        this.lf = new LoginFacade();
     }
 
     /**
@@ -71,12 +71,12 @@ public class FrontController extends HttpServlet {
                         request.getRequestDispatcher("login.jsp").forward(request, response);
                         break;
                     case "validate user":
-                        LoginFacade lf = new LoginFacade();
-                        String email = request.getParameter("email");
-                        String password = request.getParameter("password");
-                        User user = lf.userLogin(email, password);
-                        HttpSession session = request.getSession(true);
-                        session.setAttribute("user", user);
+//                        String email = request.getParameter("email");
+//                        String password = request.getParameter("password");
+//                        User user = lf.userLogin(email, password);
+//                        HttpSession session = request.getSession(true);
+//                        session.setAttribute("user", user);
+                        checkPassword(request, response);
                         generateMenu(request);
                         request.getRequestDispatcher("index.jsp").forward(request, response);
                     default:
@@ -96,7 +96,27 @@ public class FrontController extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         User user = new User(email, password);
-        dao.createUser(user);
+        lf.createUser(user);
+    }
+    
+    private void checkPassword(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+//        User user = null;
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        try {
+            User user = lf.getUser(email);
+            
+        } catch (Exception e) {
+            request.setAttribute("error", "wrong username");
+            request.getRequestDispatcher("errorpage.jsp").forward(request, response);
+            return;
+        }
+        if (user.getPassword().equals(password)) {
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+        } else {
+            request.setAttribute("error", "wrong password");
+            request.getRequestDispatcher("errorpage.jsp").forward(request, response);
+        }
     }
 
     private void generateMenu(HttpServletRequest request) {
