@@ -21,8 +21,8 @@ public class LegoLogic {
         try {
 
             Brick[] row = new Brick[brickAmount];
-            setBrickRow(row);
-
+            setBrickRow(row, isEven);
+            
             return row;
         } catch (Exception e) {
             throw new NullPointerException();
@@ -63,17 +63,35 @@ public class LegoLogic {
         return wall_1;
     }
 
-    private void setBrickRow(Brick[] row) {
+    private void setBrickRow(Brick[] row, boolean isEven) {
         for (int i = 0; i < row.length; i++) {
             switch (i) {
                 case 0:
                     row[i] = new Brick(2);
+                    if (isEven) {
+
+                        row[i].setIsEven(true);
+                    } else {
+                        row[i].setIsEven(false);
+                    }
                     break;
                 default:
                     if (row[i - 1].getLength() == 2) {
                         row[i] = new Brick(4);
+                        if (isEven) {
+
+                        row[i].setIsEven(true);
+                    } else {
+                        row[i].setIsEven(false);
+                    }
                     } else {
                         row[i] = new Brick(2);
+                        if (isEven) {
+
+                        row[i].setIsEven(true);
+                    } else {
+                        row[i].setIsEven(false);
+                    }
                     }
             }
         }

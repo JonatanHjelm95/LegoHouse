@@ -13,6 +13,15 @@ public class Brick {
     private int length;
     private final int width = 2;
     private int price;
+    private boolean isEven;
+
+    public boolean isIsEven() {
+        return isEven;
+    }
+
+    public void setIsEven(boolean isEven) {
+        this.isEven = isEven;
+    }
 
     public Brick(int length) {
         this.length = length;

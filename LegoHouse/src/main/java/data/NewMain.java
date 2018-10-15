@@ -21,6 +21,11 @@ public class NewMain {
     public static void main(String[] args) {
 
         printHouse();
+//        LegoLogic ll = new LegoLogic();
+//        int length = 8;
+//        int maxAmount = length / 3 * 2;
+//        System.out.println(length % maxAmount);
+    
     }
 
     private static void printHouse() {
@@ -32,6 +37,7 @@ public class NewMain {
             Brick[] rows = (Brick[]) wall_1.get(i);
             for (int j = 0; j < rows.length; j++) {
                 System.out.println(rows[j].getLength());
+                System.out.println(rows[j].isIsEven());
             }
             System.out.println("___");
         }
