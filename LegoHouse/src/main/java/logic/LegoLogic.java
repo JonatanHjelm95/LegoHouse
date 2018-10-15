@@ -7,6 +7,7 @@ package logic;
 
 import data.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -28,21 +29,26 @@ public class LegoLogic {
         }
     }
 
-    public ArrayList<Wall> createHouse(int height, int lenX, int lenY) {
+    public ArrayList<Brick[]> createHouse(int height, int lenX, int lenY) {
         //wall 1
-        ArrayList<Wall> walls = new ArrayList<Wall>();
         try {
-            ArrayList<Brick[]> wall1 = new ArrayList<Brick[]>();
+            ArrayList<Brick[]> wall_1 = new ArrayList();
             for (int i = 0; i < height; i++) {
                 if (i % 2 == 0) {
-                    wall1.add(createRow(true, lenX));
-                } else {
-                    wall1.add(createRow(false, lenX));
+                    Brick[] row = createRow(true, lenX);
+                    wall_1.add(row);
+                    System.out.println("added even wall");
+                    
                 }
-                Wall wall_1 = new Wall(wall1);
-                walls.add(wall_1);
-                return walls;
+                if (i % 2 != 0) {
+                    Brick[] row = createRow(false, lenX);
+                    wall_1.add(row);
+                    System.out.println("added Uneven wall");
+
+                }
+                
             }
+            return wall_1;
         } catch (Exception e) {
             e.printStackTrace();
         }

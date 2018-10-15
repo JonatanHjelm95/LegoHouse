@@ -20,23 +20,12 @@ public class NewMain {
     public static void main(String[] args) {
 
         LegoLogic ll = new LegoLogic();
-
-//        Brick[] firstRow = ll.createRow(true, 6);
-//        Brick[] secRow = ll.createRow(false, 6);
-//        for (Brick brick : firstRow) {
-//            System.out.println(brick.getLength());
-//        }
-//        System.out.println("break");
-//        for (Brick brick : secRow) {
-//            System.out.println(brick.getLength());
-//        }
-//        
-        ArrayList<Wall> hus = ll.createHouse(4, 6, 8);
-        ArrayList<Brick[]> wall_1 = hus.get(0).Wall;
-        for (int i = 0; i < wall_1.size(); i++) {
-            Brick[] row1 = wall_1.get(i);
-            System.out.println(row1[i].getLength());
-
+        ArrayList<Brick[]> wall = ll.createHouse(5, 6, 5);
+        for (int i = 0; i < wall.size(); i++) {
+            for (int j = 0; j < wall.get(i).length; j++) {
+                System.out.println(wall.get(i)[j].getLength());
+            }
+                System.out.println("___");
         }
     }
 

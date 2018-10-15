@@ -12,21 +12,19 @@ import java.util.ArrayList;
  * @author Jonatan
  */
 public class Wall {
+    ArrayList<Brick[]> bricks;
 
-    public Wall() {
-    }
-    
-    ArrayList<Brick[]> Wall;
-
-    public ArrayList<Brick[]> getWall() {
-        return Wall;
+    public Wall(ArrayList<Brick[]> bricks) {
+        this.bricks = bricks;
     }
 
-    public void setWall(ArrayList<Brick[]> Wall) {
-        this.Wall = Wall;
+    public ArrayList<Brick[]> getBricks() {
+        return bricks;
     }
 
-    public Wall(ArrayList<Brick[]> Wall) {
-        this.Wall = new ArrayList<Brick[]>();
+    public void setBricks(ArrayList<Brick[]> bricks) {
+        this.bricks = bricks;
     }
+
+
 }

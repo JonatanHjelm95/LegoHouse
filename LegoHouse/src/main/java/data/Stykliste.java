@@ -6,19 +6,13 @@
 package data;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
  * @author Jonatan
  */
 public class Stykliste {
-    private ArrayList<Wall> walls;
+    private HashMap<String, Wall> walls;
 
-    public ArrayList<Wall> getWalls() {
-        return walls;
-    }
-
-    public void setWalls(ArrayList<Wall> rows) {
-        this.walls = walls;
-    }
 }
