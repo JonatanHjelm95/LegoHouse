@@ -20,24 +20,46 @@ public class NewMain {
      */
     public static void main(String[] args) {
 
-        printHouse();
-//        LegoLogic ll = new LegoLogic();
-//        int length = 8;
-//        int maxAmount = length / 3 * 2;
-//        System.out.println(length % maxAmount);
-    
+//        printHouse();
+        LegoLogic ll = new LegoLogic();
+        ll.test(4, 6, 5);
+        ArrayList<Brick[]> house = ll.getHouse();
+        for (int i = 0; i < house.size(); i++) {
+            Brick[] row = house.get(3);
+            System.out.println(row[2].getLength());
+//            for (Brick row1 : row) {
+//                System.out.println(row1.getLength());
+//            }
+//            System.out.println("___");
+        }
+//        int length = 6*2;
+//        int maxAmount = 8;
+//          int amount = ll.getBrickAmount(true, 6);
+//          System.out.println(amount);
+          
     }
 
     private static void printHouse() {
         LegoLogic ll = new LegoLogic();
+
         Stykliste liste = (Stykliste) ll.createHouse(5, 6, 5);
-        System.out.println(liste.get("wall 1"));
         ArrayList wall_1 = (ArrayList) liste.get("wall 1");
+        ArrayList wall_2 = (ArrayList) liste.get("wall 2");
         for (int i = 0; i < wall_1.size(); i++) {
             Brick[] rows = (Brick[]) wall_1.get(i);
             for (int j = 0; j < rows.length; j++) {
                 System.out.println(rows[j].getLength());
                 System.out.println(rows[j].isIsEven());
+            }
+            System.out.println("___");
+        }
+        ll.wall_1_Status(wall_1, 6);
+        System.out.println("wall 2");
+        for (int i = 0; i < wall_2.size(); i++) {
+            Brick[] rows2 = (Brick[]) wall_2.get(i);
+            for (int j = 0; j < rows2.length; j++) {
+                System.out.println(rows2[j].getLength());
+                System.out.println(rows2[j].isIsEven());
             }
             System.out.println("___");
         }
