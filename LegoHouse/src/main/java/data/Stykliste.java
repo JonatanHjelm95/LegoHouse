@@ -12,7 +12,7 @@ import java.util.HashMap;
  *
  * @author Jonatan
  */
-public class Stykliste {
+public class Stykliste extends HashMap{
     private HashMap<String, Wall> walls;
 
 }

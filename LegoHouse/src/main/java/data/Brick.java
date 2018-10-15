@@ -11,6 +11,7 @@ package data;
  */
 public class Brick {
     private int length;
+    private final int width = 2;
     private int price;
 
     public Brick(int length) {
@@ -26,11 +27,10 @@ public class Brick {
     }
 
     public int getPrice() {
+        price = length*width;
         return price;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
-    }
+
 
 }

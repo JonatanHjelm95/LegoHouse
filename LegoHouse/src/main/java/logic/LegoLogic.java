@@ -29,31 +29,38 @@ public class LegoLogic {
         }
     }
 
-    public ArrayList<Brick[]> createHouse(int height, int lenX, int lenY) {
+    public HashMap<String, Wall> createHouse(int height, int lenX, int lenY) {
         //wall 1
         try {
-            ArrayList<Brick[]> wall_1 = new ArrayList();
-            for (int i = 0; i < height; i++) {
-                if (i % 2 == 0) {
-                    Brick[] row = createRow(true, lenX);
-                    wall_1.add(row);
-                    System.out.println("added even wall");
-                    
-                }
-                if (i % 2 != 0) {
-                    Brick[] row = createRow(false, lenX);
-                    wall_1.add(row);
-                    System.out.println("added Uneven wall");
-
-                }
-                
-            }
-            return wall_1;
+            Stykliste house = new Stykliste();
+            ArrayList<Brick[]> wall_1 = createWall_1(height, lenX);
+            house.put("wall 1", wall_1);
+            return house;
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         return null;
+    }
+
+    private ArrayList<Brick[]> createWall_1(int height, int lenX) {
+        ArrayList<Brick[]> wall_1 = new ArrayList();
+        for (int i = 0; i < height; i++) {
+            if (i % 2 == 0) {
+                Brick[] row = createRow(true, lenX);
+                wall_1.add(row);
+                System.out.println("added even wall");
+
+            }
+            if (i % 2 != 0) {
+                Brick[] row = createRow(false, lenX);
+                wall_1.add(row);
+                System.out.println("added Uneven wall");
+
+            }
+
+        }
+        return wall_1;
     }
 
     private void setBrickRow(Brick[] row) {

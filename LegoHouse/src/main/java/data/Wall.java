@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author Jonatan
  */
-public class Wall {
+public class Wall extends ArrayList {
     ArrayList<Brick[]> bricks;
 
     public Wall(ArrayList<Brick[]> bricks) {

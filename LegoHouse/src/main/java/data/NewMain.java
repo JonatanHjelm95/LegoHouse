@@ -6,6 +6,7 @@
 package data;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import logic.LegoLogic;
 
 /**
@@ -19,13 +20,20 @@ public class NewMain {
      */
     public static void main(String[] args) {
 
+        printHouse();
+    }
+
+    private static void printHouse() {
         LegoLogic ll = new LegoLogic();
-        ArrayList<Brick[]> wall = ll.createHouse(5, 6, 5);
-        for (int i = 0; i < wall.size(); i++) {
-            for (int j = 0; j < wall.get(i).length; j++) {
-                System.out.println(wall.get(i)[j].getLength());
+        Stykliste liste = (Stykliste) ll.createHouse(5, 6, 5);
+        System.out.println(liste.get("wall 1"));
+        ArrayList wall_1 = (ArrayList) liste.get("wall 1");
+        for (int i = 0; i < wall_1.size(); i++) {
+            Brick[] rows = (Brick[]) wall_1.get(i);
+            for (int j = 0; j < rows.length; j++) {
+                System.out.println(rows[j].getLength());
             }
-                System.out.println("___");
+            System.out.println("___");
         }
     }
 
