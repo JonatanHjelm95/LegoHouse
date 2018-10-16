@@ -22,21 +22,27 @@ public class NewMain {
 
 //        printHouse();
         LegoLogic ll = new LegoLogic();
-        ll.test(4, 6, 5);
+        ll.test(4, 3, 8);
         ArrayList<Brick[]> house = ll.getHouse();
         for (int i = 0; i < house.size(); i++) {
-            Brick[] row = house.get(3);
-            System.out.println(row[2].getLength());
-//            for (Brick row1 : row) {
-//                System.out.println(row1.getLength());
-//            }
-//            System.out.println("___");
+            Brick[] row = house.get(i);
+            for (int j = 0; j < row.length; j++) {
+                if (row[j] != null) {
+                    System.out.println(row[j].getLength());
+                }
+            }
+            System.out.println("___");
+            //4x10 virker
+            //6x6 virker
+            //5x8 virker
         }
+//        Brick[] test = house.get(3);
+//        System.out.println(test.length);
 //        int length = 6*2;
 //        int maxAmount = 8;
 //          int amount = ll.getBrickAmount(true, 6);
 //          System.out.println(amount);
-          
+
     }
 
     private static void printHouse() {

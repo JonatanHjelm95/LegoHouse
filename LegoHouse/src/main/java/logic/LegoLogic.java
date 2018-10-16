@@ -23,27 +23,29 @@ public class LegoLogic {
 
     public void test(int height, int lenX, int lenY) {
         //side1
-        Brick[] side1 = new Brick[lenX];
         int brickCount = 0;
-        int remainingRoom = lenX * 2;
-        for (int i = 0; i < remainingRoom; i++) {
+        int rowLength = 0;
+        int availableRoom = lenX * 2;
+        Brick[] side1 = new Brick[availableRoom];
+        for (int i = 0; rowLength < availableRoom - 2; i++) {
             if (i == 0) {
                 side1[i] = new Brick(2);
-                remainingRoom -= side1[i].getLength();
+                rowLength += side1[i].getLength();
                 brickCount++;
             }
             if (i > 0 && side1[i - 1].getLength() == 2) {
                 side1[i] = new Brick(4);
-                remainingRoom -= side1[i].getLength();
+                rowLength += side1[i].getLength();
                 brickCount++;
 
             }
             if (i > 0 && side1[i - 1].getLength() == 4) {
                 side1[i] = new Brick(2);
-                remainingRoom -= side1[i].getLength();
+                rowLength += side1[i].getLength();
                 brickCount++;
 
             }
+            System.out.println("wall 1 length: " + rowLength);
         }
         Brick[] side1Trim = new Brick[brickCount];
         for (int i = 0; i < side1.length; i++) {
@@ -54,34 +56,41 @@ public class LegoLogic {
         house.add(side1Trim);
         //side2
         int x = side1Trim.length - 1;
-        Brick[] side2 = new Brick[lenY];
-        brickCount = 0;
-        if (remainingRoom == 0) {
-            remainingRoom = lenY * 2 - 1;
+        if (availableRoom - rowLength == 0) {
+            availableRoom = lenY * 2 - 2;
         } else {
-            remainingRoom = lenY * 2;
+            availableRoom = lenY * 2;
         }
-        for (int i = 0; i < remainingRoom; i++) {
+        brickCount = 0;
+        rowLength = 0;
+        Brick[] side2 = new Brick[availableRoom];
+        for (int i = 0; rowLength < availableRoom - 2; i++) {
             if (i == 0 && side1Trim[x].getLength() == 4) {
                 side2[i] = new Brick(2);
-                remainingRoom -= side2[i].getLength();
+                rowLength += side2[i].getLength();
                 brickCount++;
             }
             if (i == 0 && side1Trim[x].getLength() == 2) {
                 side2[i] = new Brick(4);
-                remainingRoom -= side2[i].getLength();
+                rowLength += side2[i].getLength();
                 brickCount++;
             }
             if (i > 0 && side2[i - 1].getLength() == 4) {
                 side2[i] = new Brick(2);
-                remainingRoom -= side2[i].getLength();
+                rowLength += side2[i].getLength();
                 brickCount++;
             }
             if (i > 0 && side2[i - 1].getLength() == 2) {
                 side2[i] = new Brick(4);
-                remainingRoom -= side2[i].getLength();
+                rowLength += side2[i].getLength();
                 brickCount++;
             }
+            if (availableRoom == 4 && side2[i - 1].getLength() == 2) {
+                side2[i] = new Brick(4);
+                rowLength += side2[i].getLength();
+                brickCount++;
+            }
+            System.out.println("wall 2 length: " + rowLength);
         }
         Brick[] side2Trim = new Brick[brickCount];
         for (int i = 0; i < side2.length; i++) {
@@ -92,34 +101,38 @@ public class LegoLogic {
         house.add(side2Trim);
         //side3
         int z = side2Trim.length - 1;
-        Brick[] side3 = new Brick[lenX];
-        brickCount = 0;
-        if (remainingRoom == 0) {
-            remainingRoom = lenX * 2 - 1;
+        if (availableRoom - rowLength == 0) {
+            availableRoom = lenX * 2 - 2;
         } else {
-            remainingRoom = lenX * 2;
+            availableRoom = lenX * 2;
         }
-        for (int i = 0; i < remainingRoom; i++) {
+        rowLength = 0;
+        brickCount = 0;
+        Brick[] side3 = new Brick[availableRoom];
+        for (int i = 0; rowLength < availableRoom - 2; i++) {
+
             if (i == 0 && side2Trim[z].getLength() == 4) {
                 side3[i] = new Brick(2);
-                remainingRoom -= side3[i].getLength();
+                rowLength += side3[i].getLength();
                 brickCount++;
             }
             if (i == 0 && side2Trim[z].getLength() == 2) {
                 side3[i] = new Brick(4);
-                remainingRoom -= side3[i].getLength();
+                rowLength += side3[i].getLength();
                 brickCount++;
             }
             if (i > 0 && side3[i - 1].getLength() == 4) {
                 side3[i] = new Brick(2);
-                remainingRoom -= side3[i].getLength();
+                rowLength += side3[i].getLength();
                 brickCount++;
             }
             if (i > 0 && side3[i - 1].getLength() == 2) {
                 side3[i] = new Brick(4);
-                remainingRoom -= side3[i].getLength();
+                rowLength += side3[i].getLength();
                 brickCount++;
             }
+            System.out.println("wall 3 length: " + rowLength);
+
         }
         Brick[] side3Trim = new Brick[brickCount];
         for (int i = 0; i < side3.length; i++) {
@@ -130,44 +143,70 @@ public class LegoLogic {
         house.add(side3Trim);
         //side4
         int y = side3Trim.length - 1;
-        Brick[] side4 = new Brick[lenX];
-        brickCount = 0;
-        if (remainingRoom == 0) {
-            remainingRoom = lenY * 2 - 2;
+        if (availableRoom - rowLength == 0) {
+            availableRoom = (lenY * 2) - 4;
         } else {
-            remainingRoom = lenY * 2;
+            availableRoom = (lenY * 2) - 2;
         }
-        System.out.println(remainingRoom);
-        for (int i = 0; i < remainingRoom; i++) {
-
+        rowLength = 0;
+        brickCount = 0;
+        Brick[] side4 = new Brick[availableRoom];
+        System.out.println(side4.length);
+        for (int i = 0; rowLength < availableRoom; i++) {
             if (i == 0 && side3Trim[y].getLength() == 4) {
                 side4[i] = new Brick(2);
-                remainingRoom -= side4[i].getLength();
+                rowLength += side4[i].getLength();
                 brickCount++;
+                System.out.println("sætter en 2er");
             }
             if (i == 0 && side3Trim[y].getLength() == 2) {
                 side4[i] = new Brick(4);
-                remainingRoom -= side4[i].getLength();
+                rowLength += side4[i].getLength();
                 brickCount++;
+                System.out.println("sætter en 4er");
+
             }
 
-            if (i > 0 && side4[i - 1].getLength() == 4 ) {
-                side4[i] = new Brick(2);
-                remainingRoom -= side4[i].getLength();
-                brickCount++;
-            }
-            if (i > 0 && side4[i - 1].getLength() == 2 ) {
+            if (i > 0 && availableRoom - rowLength == 4) {
                 side4[i] = new Brick(4);
-                remainingRoom -= side4[i].getLength();
+                rowLength += side4[i].getLength();
                 brickCount++;
-            }
-            if (remainingRoom == 2) {
-                side4[i] = new Brick(4);
-                remainingRoom -= side4[i].getLength();
-                brickCount++;
+                availableRoom = 0;
                 System.out.println("finalized");
+                break;
             }
-            
+            if (i > 0 && side4[i - 1].getLength() == 4) {
+                side4[i] = new Brick(2);
+                rowLength += side4[i].getLength();
+                brickCount++;
+                System.out.println("sætter en 2er");
+
+            }
+            if (i > 0 && side4[i - 1].getLength() == 2) {
+                side4[i] = new Brick(4);
+                rowLength += side4[i].getLength();
+                brickCount++;
+                System.out.println("sætter en 4er");
+
+            }
+//            if (i > 0 && side4[i - 1].getLength() == 2 && availableRoom - rowLength == 6) {
+//                side4[i] = new Brick(4);
+//                rowLength += side4[i].getLength();
+//                brickCount++;
+//                System.out.println("nej");
+//
+//            }
+//            if (i > 0 && side4[i - 1].getLength() == 4 && availableRoom - rowLength == 2) {
+//                side4[i] = new Brick(2);
+//                rowLength += side4[i].getLength();
+//                brickCount++;
+//                System.out.println("dav");
+//
+//            }
+            System.out.println("wall 4 length: " + rowLength);
+
+            System.out.println("availableRoom: " + (availableRoom - rowLength));
+
         }
         Brick[] side4Trim = new Brick[brickCount];
         for (int i = 0; i < side4.length; i++) {
@@ -175,6 +214,7 @@ public class LegoLogic {
                 side4Trim[i] = side4[i];
             }
         }
+
         house.add(side4Trim);
     }
 
