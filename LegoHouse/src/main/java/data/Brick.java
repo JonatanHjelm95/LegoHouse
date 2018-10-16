@@ -23,9 +23,12 @@ public class Brick {
         this.isEven = isEven;
     }
 
-    public Brick(int length) {
+    public Brick(int length, boolean isEven) {
         this.length = length;
+        this.isEven = isEven;
     }
+
+    
 
     public int getLength() {
         return length;

@@ -22,53 +22,30 @@ public class NewMain {
 
 //        printHouse();
         LegoLogic ll = new LegoLogic();
-        ll.test(4, 3, 8);
-        ArrayList<Brick[]> house = ll.getHouse();
-        for (int i = 0; i < house.size(); i++) {
-            Brick[] row = house.get(i);
+//        ll.createEvenLayer(10, 14);
+//        ArrayList<Brick[]> house = ll.getHouse();
+//        for (int i = 0; i < house.size(); i++) {
+//            Brick[] row = house.get(i);
+//            for (int j = 0; j < row.length; j++) {
+//                if (row[j] != null) {
+//                    System.out.println(row[j].getLength());
+//                }
+//            }
+//            System.out.println("___");
+        //4x10 virker for begge
+        //6x6 virker for begge
+        //5x8 virker for begge
+        Stykliste hus = ll.createHouse(4, 6, 6);
+        ArrayList<Brick[]> layer1 = (ArrayList<Brick[]>)hus.get("layer 5");
+        for (int i = 0; i < layer1.size(); i++) {
+            Brick[] row = layer1.get(i);
             for (int j = 0; j < row.length; j++) {
-                if (row[j] != null) {
-                    System.out.println(row[j].getLength());
-                }
-            }
-            System.out.println("___");
-            //4x10 virker
-            //6x6 virker
-            //5x8 virker
-        }
-//        Brick[] test = house.get(3);
-//        System.out.println(test.length);
-//        int length = 6*2;
-//        int maxAmount = 8;
-//          int amount = ll.getBrickAmount(true, 6);
-//          System.out.println(amount);
-
-    }
-
-    private static void printHouse() {
-        LegoLogic ll = new LegoLogic();
-
-        Stykliste liste = (Stykliste) ll.createHouse(5, 6, 5);
-        ArrayList wall_1 = (ArrayList) liste.get("wall 1");
-        ArrayList wall_2 = (ArrayList) liste.get("wall 2");
-        for (int i = 0; i < wall_1.size(); i++) {
-            Brick[] rows = (Brick[]) wall_1.get(i);
-            for (int j = 0; j < rows.length; j++) {
-                System.out.println(rows[j].getLength());
-                System.out.println(rows[j].isIsEven());
+                System.out.println(row[j].getLength());
+                System.out.println(row[j].isIsEven());
             }
             System.out.println("___");
         }
-        ll.wall_1_Status(wall_1, 6);
-        System.out.println("wall 2");
-        for (int i = 0; i < wall_2.size(); i++) {
-            Brick[] rows2 = (Brick[]) wall_2.get(i);
-            for (int j = 0; j < rows2.length; j++) {
-                System.out.println(rows2[j].getLength());
-                System.out.println(rows2[j].isIsEven());
-            }
-            System.out.println("___");
-        }
+        
     }
 
 }

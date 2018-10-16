@@ -13,6 +13,6 @@ import java.util.HashMap;
  * @author Jonatan
  */
 public class Stykliste extends HashMap{
-    private HashMap<String, Wall> walls;
+    private HashMap<String, ArrayList<Brick[]>> house;
 
 }
