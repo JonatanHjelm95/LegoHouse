@@ -1,6 +1,6 @@
 <%-- 
-    Document   : index
-    Created on : Oct 11, 2018, 12:50:57 PM
+    Document   : registerpage
+    Created on : Oct 11, 2018, 2:07:22 PM
     Author     : jonab
 --%>
 
@@ -16,9 +16,23 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <title>index</title>
+        <title>register Page</title>
     </head>
     <body>
         <%=request.getAttribute("menu")%>
+
+        <form name="register" action="FrontController" method="POST">
+            <input type="hidden" name="command" value="register">
+            Email:<br>
+            <input type="text" name="email" value="someone@nowhere.com">
+            <br>
+            Password:<br>
+            <input type="password" name="password1" value="sesam">
+            <br>
+            Retype Password:<br>
+            <input type="password" name="password2" value="sesam">
+            <br>
+            <input type="submit" value="Submit">
+        </form>
     </body>
 </html>
