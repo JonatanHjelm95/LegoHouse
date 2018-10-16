@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import logic.LoginSampleException;
 
 /**
  *
@@ -21,7 +22,7 @@ public class DAO {
     private static final String USER_LOGIN = "SELECT * FROM user WHERE email=? AND password=?";
     private static final String GET_USER = "SELECT * FROM LegoDB.user where email =?;";
 
-    public void createUser(User user) {
+    public static void createUser(User user) {
         try {
             Connection con = Connector.connection();
             PreparedStatement ps = con.prepareStatement(NEW_USER, Statement.RETURN_GENERATED_KEYS);
@@ -38,7 +39,7 @@ public class DAO {
         }
     }
 
-    public User login(String email, String password) {
+    public static User login(String email, String password) throws LoginSampleException {
         try {
             Connection con = Connector.connection();
             PreparedStatement ps = con.prepareStatement(USER_LOGIN);
@@ -61,7 +62,7 @@ public class DAO {
         return null;
     }
 
-    public User getUser(String email) throws Exception {
+    public static User getUser(String email) throws Exception {
         try {
             Connection con = Connector.connection();
             PreparedStatement ps = con.prepareStatement(GET_USER);

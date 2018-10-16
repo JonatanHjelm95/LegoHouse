@@ -9,14 +9,18 @@ import data.DAO;
 import data.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import logic.HTMLGenerator;
-import logic.LoginFacade;
+import logic.LogicFacade;
+import logic.LoginSampleException;
 
 /**
  *
@@ -25,10 +29,10 @@ import logic.LoginFacade;
 @WebServlet(name = "FrontController", urlPatterns = {"/FrontController"})
 public class FrontController extends HttpServlet {
 
-   private LoginFacade lf; 
+    private LogicFacade loginFacade;
 
     public FrontController() {
-        this.lf = new LoginFacade();
+        this.loginFacade = new LogicFacade();
     }
 
     /**
@@ -40,82 +44,15 @@ public class FrontController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            String origin = request.getParameter("origin");
-            generateMenu(request);
-            if (origin != null) {
-                switch (origin) {
-                    case "index":
-                        generateMenu(request);
-                        request.getRequestDispatcher("index.jsp").forward(request, response);
-                        break;
-                    case "login":
-                        generateMenu(request);
-                        request.getRequestDispatcher("loginpage.jsp").forward(request, response);
-                        break;
-                    case "signup":
-                        generateMenu(request);
-                        request.getRequestDispatcher("registerpage.jsp").forward(request, response);
-                        break;
-                    case "create user":
-                        createUser(request);
-                        generateMenu(request);
-                        request.getRequestDispatcher("index.jsp").forward(request, response);
-                        break;
-                    case "logout":
-                        request.getSession(false).invalidate();
-                        generateMenu(request);
-                        request.getRequestDispatcher("login.jsp").forward(request, response);
-                        break;
-                    case "validate user":
-//                        String email = request.getParameter("email");
-//                        String password = request.getParameter("password");
-//                        User user = lf.userLogin(email, password);
-//                        HttpSession session = request.getSession(true);
-//                        session.setAttribute("user", user);
-                        checkPassword(request, response);
-                        generateMenu(request);
-                        request.getRequestDispatcher("index.jsp").forward(request, response);
-                    default:
-                        request.getRequestDispatcher("index.jsp").forward(request, response);
-                        break;
-                }
-            } else {
-                generateMenu(request);
-                request.getRequestDispatcher("index.jsp").forward(request, response);
-            }
-
-        }
-
-    }
-
-    private void createUser(HttpServletRequest request) {
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        User user = new User(email, password);
-        lf.createUser(user);
-    }
-    
-    private void checkPassword(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//        User user = null;
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
+    protected void processRequest( HttpServletRequest request, HttpServletResponse response )
+            throws ServletException, IOException, LoginSampleException {
         try {
-            User user = lf.getUser(email);
-            
-        } catch (Exception e) {
-            request.setAttribute("error", "wrong username");
-            request.getRequestDispatcher("errorpage.jsp").forward(request, response);
-            return;
-        }
-        if (user.getPassword().equals(password)) {
-            request.getRequestDispatcher("index.jsp").forward(request, response);
-        } else {
-            request.setAttribute("error", "wrong password");
-            request.getRequestDispatcher("errorpage.jsp").forward(request, response);
+            Command action = Command.from( request );
+            String view = action.execute( request, response );
+            request.getRequestDispatcher( "/WEB-INF/" + view + ".jsp" ).forward( request, response );
+        } catch ( LoginSampleException ex ) {
+            request.setAttribute( "error", ex.getMessage() );
+            request.getRequestDispatcher( "index.jsp" ).forward( request, response );
         }
     }
 
@@ -139,7 +76,11 @@ public class FrontController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (LoginSampleException ex) {
+            Logger.getLogger(FrontController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -153,7 +94,11 @@ public class FrontController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (LoginSampleException ex) {
+            Logger.getLogger(FrontController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
