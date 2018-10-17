@@ -38,7 +38,6 @@ public class OrderDetails extends Command {
             Order order = new Order(height, lenX, lenY);
             request.setAttribute("dimensions", dimensions);
             request.getSession().setAttribute("order", order);
-//            request.setAttribute("house", house);
             request.setAttribute("table", gen.generateStykliste(house, request));
             return "orderdetails";
         } catch (NumberFormatException e) {

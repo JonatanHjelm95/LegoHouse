@@ -20,6 +20,6 @@
     </head>
     <body>
         <%=request.getAttribute("menu")%>
-        
+        <h1>Nåede hertil...</h1>
     </body>
 </html>

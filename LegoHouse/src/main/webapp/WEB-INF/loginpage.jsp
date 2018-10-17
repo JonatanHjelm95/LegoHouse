@@ -20,24 +20,7 @@
     </head>
     <body>
         <%=request.getAttribute("menu")%>
-        <!--<div class="topnav">
-            <form id="Home" action="FrontController" method="POST">
-                <input type="hidden" name="command" value="home">
-                <input id="btn" type="submit" value="Home">
-            </form>
-            <form id="createHouse" action="FrontController" method="POST">
-                <input type="hidden" name="command" value="createHouse">
-                <input id="btn" type="submit" value="Create House">
-            </form>
-            <form id="register" action="FrontController" method="POST">
-                <input type="hidden" name="command" value="registerpage">
-                <input id="btn" type="submit" value="Register">
-            </form>
-            <form id="login" action="FrontController" method="POST">
-                <input type="hidden" name="command" value="loginpage">
-                <input id="btn" class="active" type="submit" value="Login">
-            </form>
-        </div>-->
+        
 
         <form action="FrontController" method="POST">
             <input type="hidden" name="command" value="login">

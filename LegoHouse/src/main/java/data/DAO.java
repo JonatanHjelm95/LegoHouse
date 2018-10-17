@@ -10,6 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import logic.LoginSampleException;
 
 /**
@@ -23,6 +25,7 @@ public class DAO {
     private static final String USER_LOGIN = "SELECT * FROM user WHERE email=? AND password=?";
     private static final String GET_USER = "SELECT * FROM LegoDB.user where email =?;";
     private static final String ADD_ORDER = "INSERT INTO `Order` (Height, LenX, LenY, numberOfBricks, TotalPrice, user_id) VALUES (?, ?, ?, ?, ?, ?)";
+    private static final String GET_ORDERS = "SELECT * FROM LegoDB.`Order`";
 
     public static void createUser(User user) {
 //        while (!user.getPassword().isEmpty() && !user.getEmail().isEmpty()) {
@@ -44,7 +47,7 @@ public class DAO {
 //        }
     }
 
-    public static void createOrder(Order order, User user) throws Exception{
+    public static void createOrder(Order order, User user) throws Exception {
         try {
             Connection con = Connector.connection();
             PreparedStatement ps = con.prepareStatement(ADD_ORDER, Statement.RETURN_GENERATED_KEYS);

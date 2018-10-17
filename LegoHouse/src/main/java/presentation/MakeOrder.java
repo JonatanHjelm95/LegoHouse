@@ -25,8 +25,6 @@ public class MakeOrder extends Command {
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
         try {
             int[] extras = (int[]) request.getSession().getAttribute("extras");
-//            int[] dimensions = (int[]) request.getAttribute("dimensions");
-//            ArrayList house = (ArrayList) request.getAttribute("house");
             User user = (User) request.getSession(false).getAttribute("user");
             
             Order order = (Order) request.getSession().getAttribute("order");

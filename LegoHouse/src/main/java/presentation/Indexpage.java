@@ -26,6 +26,7 @@ public class Indexpage extends Command {
         String menu = gen.generateMenu(request);
         HttpSession session = request.getSession();
         request.setAttribute("menu", menu);
+
         return "index";
     }
 

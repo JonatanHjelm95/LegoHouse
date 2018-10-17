@@ -59,18 +59,31 @@ public class HTMLGenerator {
             + "            <input type=\"hidden\" name=\"command\" value=\"logout\">\n"
             + "            <input id=\"btn\" type=\"submit\" value=\"Logout\">\n"
             + "        </form>";
+    String employee = "<form id=\"employee\" action=\"FrontController\" method=\"POST\">\n"
+            + "            <input type=\"hidden\" name=\"command\" value=\"employee\">\n"
+            + "            <input id=\"btn\" type=\"submit\" value=\"View all orders\">\n"
+            + "        </form>";
 
     public String generateMenu(HttpServletRequest request) {
         User user;
         if (request.getSession(false) != null) {
             try {
                 user = (User) request.getSession(false).getAttribute("user");
-                if (user.getEmail() != null) {
-                    return "<!-- Logged In --><div class=\"topnav\">\n"
+                if ("Employee".equals(user.getRole())) {
+                    return "<!-- Logged In as employee--><div class=\"topnav\">\n"
                             + home + "\n"
                             + createHouse + "\n"
+                            + employee + "\n"
                             + logout + "\n"
-                            + "<h5>Logged in as: " + user.getEmail() + "</h5>\n"
+                            + "<h5 id=\"user\">Logged in as: " + user.getEmail() + "</h5>\n"
+                            + "</div>";
+                }
+                if (user.getEmail() != null) {
+                    return "<!-- Logged In as customer --><div class=\"topnav\">\n"
+                            + home + "\n"
+                            + logout + "\n"
+                            + createHouse + "\n"
+                            + "<h5 id=\"user\">Logged in as: " + user.getEmail() + "</h5>\n"
                             + "</div>";
                 }
             } catch (NullPointerException ne) {
