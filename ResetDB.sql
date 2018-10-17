@@ -52,44 +52,6 @@ DEFAULT CHARACTER SET = latin1;
 
 USE `LegoDB` ;
 
--- -----------------------------------------------------
--- Table `LegoDB`.`user`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `LegoDB`.`user` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `email` VARCHAR(90) NOT NULL,
-  `password` VARCHAR(45) NOT NULL,
-  `role` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `email_UNIQUE` (`email` ASC))
-ENGINE = InnoDB
-AUTO_INCREMENT = 21
-DEFAULT CHARACTER SET = latin1;
-
-
--- -----------------------------------------------------
--- Table `LegoDB`.`Order`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `LegoDB`.`Order` (
-  `OrderID` INT(11) NOT NULL AUTO_INCREMENT,
-  `Height` INT(11) NOT NULL,
-  `LenX` INT(11) NOT NULL,
-  `LenY` INT(11) NOT NULL,
-  `numberOfBricks` INT(11) NOT NULL,
-  `TotalPrice` INT(11) NOT NULL,
-  `Created` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `user_id` INT(11) NOT NULL,
-  PRIMARY KEY (`OrderID`, `user_id`),
-  INDEX `fk_Order_user_idx` (`user_id` ASC),
-  CONSTRAINT `fk_Order_user`
-    FOREIGN KEY (`user_id`)
-    REFERENCES `LegoDB`.`user` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB
-AUTO_INCREMENT = 1008
-DEFAULT CHARACTER SET = latin1;
-
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
