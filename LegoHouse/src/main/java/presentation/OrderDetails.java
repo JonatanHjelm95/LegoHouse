@@ -5,7 +5,9 @@
  */
 package presentation;
 
+import data.Order;
 import data.Stykliste;
+import data.User;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import logic.HTMLGenerator;
@@ -32,7 +34,12 @@ public class OrderDetails extends Command {
             String lenY_str = request.getParameter("lenY");
             int lenY = Integer.parseInt(lenY_str);
             Stykliste house = LogicFacade.createHouse(height, lenX, lenY);
-            request.setAttribute("table", gen.generateStykliste(house));
+            int[] dimensions = {height, lenX, lenY};
+            Order order = new Order(height, lenX, lenY);
+            request.setAttribute("dimensions", dimensions);
+            request.getSession().setAttribute("order", order);
+//            request.setAttribute("house", house);
+            request.setAttribute("table", gen.generateStykliste(house, request));
             return "orderdetails";
         } catch (NumberFormatException e) {
             request.setAttribute("error", "NumberFormatException");

@@ -6,6 +6,7 @@
 package logic;
 
 import data.Brick;
+import data.Order;
 import data.Stykliste;
 import data.User;
 import java.util.ArrayList;
@@ -85,7 +86,7 @@ public class HTMLGenerator {
                 + "</div>";
     }
 
-    public String generateStykliste(Stykliste house) {
+    public String generateStykliste(Stykliste house, HttpServletRequest request) {
         int numberOfBricks = 0;
         int totalPrice = 0;
 
@@ -150,10 +151,12 @@ public class HTMLGenerator {
 
             table += "</tr>";
         }
-        table += "<tr><th>Amount of Bricks</th><th><th><th>Total Price</th><th></th></tr>";
+        table += "<tr><th>Amount of Bricks</th><th></th><th>Total Price</th><th></th></tr>";
 
         table += "<tr><td>" + numberOfBricks + "</td><td></td><td></td><td>" + totalPrice + " kr</td></tr>";
         table += "</table>";
+        int[] extras = {numberOfBricks, totalPrice};
+        request.getSession().setAttribute("extras", extras);
         return table;
     }
 

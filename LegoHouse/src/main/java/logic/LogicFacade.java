@@ -6,6 +6,7 @@
 package logic;
 
 import data.DAO;
+import data.Order;
 import data.Stykliste;
 import data.User;
 import javax.servlet.http.HttpSession;
@@ -46,4 +47,9 @@ public class LogicFacade {
         }
         return null;
     }
+    
+    public static void createOrder(Order order, User user) throws Exception{
+        DAO.createOrder(order, user);
+    }
+    
 }

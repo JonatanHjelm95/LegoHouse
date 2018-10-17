@@ -5,6 +5,7 @@
  */
 package data;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 
 /**
@@ -17,14 +18,52 @@ public class Order {
     private String status;
     private Timestamp created;
 
-    public Order(int OrderID, int height, int lenX, int lenY, int noBricks, int TotalPrice, String status) {
+    public void setOrderID(int OrderID) {
         this.OrderID = OrderID;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public void setLenX(int lenX) {
+        this.lenX = lenX;
+    }
+
+    public void setLenY(int lenY) {
+        this.lenY = lenY;
+    }
+
+    public void setNoBricks(int noBricks) {
+        this.noBricks = noBricks;
+    }
+
+    public void setTotalPrice(int TotalPrice) {
+        this.TotalPrice = TotalPrice;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public Order(int height, int lenX, int lenY) {
+        this.height = height;
+        this.lenX = lenX;
+        this.lenY = lenY;
+    }
+    private Date date;
+
+    public Order(int height, int lenX, int lenY, int noBricks, int TotalPrice, String status) {
         this.height = height;
         this.lenX = lenX;
         this.lenY = lenY;
         this.noBricks = noBricks;
         this.TotalPrice = TotalPrice;
         this.status = status;
+        this.created = new Timestamp(date.getTime());
+    }
+
+    public Order() {
     }
 
     public void setStatus(String status) {
@@ -64,6 +103,7 @@ public class Order {
     }
 
     public Timestamp getCreated() {
+//        created = new java.sql.Timestamp(date.getTime());
         return created;
     }
 

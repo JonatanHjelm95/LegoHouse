@@ -22,6 +22,7 @@ abstract class Command {
         commands.put("logout", new Logout());
         commands.put("orderpage", new Orderpage());
         commands.put("orderdetails", new OrderDetails());
+        commands.put("makeOrder", new MakeOrder());
     }
 
     static Command from(HttpServletRequest request) {

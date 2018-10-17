@@ -26,8 +26,8 @@
             <input type="hidden" name="command" value="createhouse">
             <input type="submit" value="back">
         </form>
-        <form id="back" action="FrontController" method="POST">
-            <input type="hidden" name="command" value="createHouse">
+        <form id="makeOrder" action="FrontController" method="POST">
+            <input type="hidden" name="command" value="makeOrder">
             <input type="submit" value="Make Order">
         </form>
 

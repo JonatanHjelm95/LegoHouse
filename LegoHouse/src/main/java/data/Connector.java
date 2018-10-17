@@ -11,7 +11,7 @@ import java.sql.SQLException;
  */
 public class Connector {
 
-    private static final String URL = "jdbc:mysql://104.248.17.255:3306/LegoDB";
+    private static final String URL = "jdbc:mysql://104.248.17.255:3306/LegoDB?autoReconnect=true&useSSL=false";
     private static final String USERNAME = "transformer";
     private static final String PASSWORD = "transformerpass";
 

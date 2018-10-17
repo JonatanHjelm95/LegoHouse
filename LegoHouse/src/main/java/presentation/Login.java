@@ -33,7 +33,7 @@ public class Login extends Command {
                 session.setAttribute("user", user1);
                 session.setAttribute("role", user1.getRole());
                 request.setAttribute("menu", gen.generateMenu(request));
-                System.out.println("succesfully logged in as :" +user1.getEmail());
+//                System.out.println("succesfully logged in as :" +user1.getEmail());
 
             }
         } catch (Exception ex) {
