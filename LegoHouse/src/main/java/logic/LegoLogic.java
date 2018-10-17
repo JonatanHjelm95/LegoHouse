@@ -383,3 +383,4 @@ public class LegoLogic {
         return house;
     }
 }
+

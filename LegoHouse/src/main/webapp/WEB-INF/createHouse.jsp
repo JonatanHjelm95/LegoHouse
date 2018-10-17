@@ -1,6 +1,6 @@
 <%-- 
-    Document   : registerpage
-    Created on : Oct 11, 2018, 2:07:22 PM
+    Document   : loginpage
+    Created on : Oct 11, 2018, 12:51:35 PM
     Author     : jonab
 --%>
 
@@ -16,7 +16,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <title>register Page</title>
+        <title>Create House</title>
     </head>
     <body>
         <div class="topnav">
@@ -26,11 +26,11 @@
             </form>
             <form id="createHouse" action="FrontController" method="POST">
                 <input type="hidden" name="command" value="createHouse">
-                <input id="btn" type="submit" value="Create House">
+                <input id="btn" class="active" type="submit" value="Create House">
             </form>
             <form id="register" action="FrontController" method="POST">
                 <input type="hidden" name="command" value="registerpage">
-                <input id="btn" class="active" type="submit" value="Register">
+                <input id="btn" type="submit" value="Register">
             </form>
             <form id="login" action="FrontController" method="POST">
                 <input type="hidden" name="command" value="loginpage">
@@ -38,16 +38,16 @@
             </form>
         </div>
 
-        <form name="register" action="FrontController" method="POST">
-            <input type="hidden" name="command" value="register">
-            Email:<br>
-            <input type="text" name="email" value="someone@nowhere.com">
+        <form action="FrontController" method="POST">
+            <input type="hidden" name="command" value="houseDetails">
+            height:<br>
+            <input type="text" name="height" placeholder="minimum 2">
             <br>
-            Password:<br>
-            <input type="password" name="password1" value="sesam">
+            Length X:<br>
+            <input type="text" name="lenX" placeholder="minimum 3">
             <br>
-            Retype Password:<br>
-            <input type="password" name="password2" value="sesam">
+            Length Y:<br>
+            <input type="text" name="lenY" placeholder="minimum 3">
             <br>
             <input type="submit" value="Submit">
         </form>

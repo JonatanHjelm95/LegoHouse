@@ -30,9 +30,11 @@ import logic.LoginSampleException;
 public class FrontController extends HttpServlet {
 
     private LogicFacade loginFacade;
+    private HTMLGenerator gen;
 
     public FrontController() {
         this.loginFacade = new LogicFacade();
+        this.gen = new HTMLGenerator();
     }
 
     /**
@@ -44,15 +46,20 @@ public class FrontController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest( HttpServletRequest request, HttpServletResponse response )
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, LoginSampleException {
         try {
-            Command action = Command.from( request );
-            String view = action.execute( request, response );
-            request.getRequestDispatcher( "/WEB-INF/" + view + ".jsp" ).forward( request, response );
-        } catch ( LoginSampleException ex ) {
-            request.setAttribute( "error", ex.getMessage() );
-            request.getRequestDispatcher( "index.jsp" ).forward( request, response );
+            Command action = Command.from(request);
+            String view = action.execute(request, response);
+            gen.topMenu(request);
+            if (view == "index") {
+                request.getRequestDispatcher(view + ".jsp").forward(request, response);
+            } else {
+                request.getRequestDispatcher("/WEB-INF/" + view + ".jsp").forward(request, response);
+            }
+        } catch (LoginSampleException ex) {
+            request.setAttribute("error", ex.getMessage());
+            request.getRequestDispatcher("index.jsp").forward(request, response);
         }
     }
 
