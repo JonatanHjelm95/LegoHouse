@@ -5,7 +5,10 @@
  */
 package logic;
 
+import data.Brick;
+import data.Stykliste;
 import data.User;
+import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -80,6 +83,78 @@ public class HTMLGenerator {
                 + login + "\n"
                 + register + "\n"
                 + "</div>";
+    }
+
+    public String generateStykliste(Stykliste house) {
+        int numberOfBricks = 0;
+        int totalPrice = 0;
+
+        String table = "<table style=\"width: 70%;\">\n"
+                + "            <tr>\n"
+                + "                <th>layer</th>\n"
+                + "                <th>side</th>\n"
+                + "                <th>row</th>\n"
+                + "               <th>Length</th>\n"
+                + "            </tr>\n";
+
+        for (int i = 0; i < house.size(); i++) {
+            String layer_str = "layer " + (i + 1);
+            ArrayList<Brick[]> layer = (ArrayList) house.get(layer_str);
+            for (int j = 0; j < layer.size(); j++) {
+                table += "<tr><td>" + layer_str + "</td>";
+                Brick[] row = layer.get(j);
+                numberOfBricks += row.length;
+                int rowLength = 0;
+                if (j == 0) {
+                    table += "<td>Side 1</td><td>";
+
+                    for (Brick brick : row) {
+                        table += brick.getLength() + ", ";
+                        rowLength += brick.getLength() / 2;
+                        totalPrice += brick.getPrice();
+                    }
+                    table += "</td>";
+                }
+                if (j == 1) {
+                    table += "<td>Side 2</td><td>";
+                    for (Brick brick : row) {
+                        table += brick.getLength() + ", ";
+                        rowLength += brick.getLength() / 2;
+                        totalPrice += brick.getPrice();
+
+                    }
+                    table += "</td>";
+                }
+                if (j == 2) {
+                    table += "<td>Side 3</td><td>";
+                    for (Brick brick : row) {
+                        table += brick.getLength() + ", ";;
+                        rowLength += brick.getLength() / 2;
+                        totalPrice += brick.getPrice();
+
+                    }
+                    table += "</td>";
+                }
+                if (j == 3) {
+                    table += "<td>Side 4</td><td>";
+                    for (Brick brick : row) {
+                        table += brick.getLength() + ", ";
+                        rowLength += brick.getLength() / 2;
+                        totalPrice += brick.getPrice();
+
+                    }
+                    table += "</td>";
+                }
+                table += "<td>" + rowLength + "</td>";
+            }
+
+            table += "</tr>";
+        }
+        table += "<tr><th>Amount of Bricks</th><th><th><th>Total Price</th><th></th></tr>";
+
+        table += "<tr><td>" + numberOfBricks + "</td><td></td><td></td><td>" + totalPrice + " kr</td></tr>";
+        table += "</table>";
+        return table;
     }
 
 }

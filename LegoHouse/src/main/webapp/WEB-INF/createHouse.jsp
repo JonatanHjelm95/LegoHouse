@@ -1,5 +1,5 @@
 <%-- 
-    Document   : loginpage
+    Document   : createHouse
     Created on : Oct 11, 2018, 12:51:35 PM
     Author     : jonab
 --%>
@@ -40,7 +40,7 @@
         </div>-->
 
         <form action="FrontController" method="POST">
-            <input type="hidden" name="command" value="houseDetails">
+            <input type="hidden" name="command" value="orderdetails">
             height:<br>
             <input type="text" name="height" placeholder="minimum 2">
             <br>

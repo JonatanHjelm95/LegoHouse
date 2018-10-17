@@ -23,6 +23,8 @@ public class Registerpage extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
+        request.setAttribute("menu", gen.generateMenu(request));
+
         return "registerpage";
     }
 

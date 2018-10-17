@@ -36,7 +36,7 @@ public class NewMain {
         //6x6 virker for begge
         //5x8 virker for begge
         Stykliste hus = ll.createHouse(4, 6, 6);
-        ArrayList<Brick[]> layer1 = (ArrayList<Brick[]>)hus.get("layer 5");
+        ArrayList<Brick[]> layer1 = (ArrayList<Brick[]>)hus.get("layer 4");
         for (int i = 0; i < layer1.size(); i++) {
             Brick[] row = layer1.get(i);
             for (int j = 0; j < row.length; j++) {

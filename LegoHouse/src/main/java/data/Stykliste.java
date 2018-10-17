@@ -12,7 +12,37 @@ import java.util.HashMap;
  *
  * @author Jonatan
  */
-public class Stykliste extends HashMap{
+public class Stykliste extends HashMap {
+
     private HashMap<String, ArrayList<Brick[]>> house;
+    private int numberOfBricks;
+    private int totalPrice;
+
+    public int getNumberOfBricks() {
+        for (int i = 0; i < house.size(); i++) {
+            String layer_str = "layer " + i + 1;
+            ArrayList<Brick[]> layer = house.get(layer_str);
+            for (int j = 0; j < layer.size(); j++) {
+                Brick[] row = layer.get(i);
+                numberOfBricks += row.length;
+            }
+        }
+        return numberOfBricks;
+    }
+
+    public int getTotalPrice() {
+
+        for (int i = 0; i < house.size(); i++) {
+            String layer_str = "layer " + i + 1;
+            ArrayList<Brick[]> layer = house.get(layer_str);
+            for (int j = 0; j < layer.size(); j++) {
+                Brick[] row = layer.get(i);
+                for (Brick brick : row) {
+                    totalPrice += brick.getPrice();
+                }
+            }
+        }
+        return totalPrice;
+    }
 
 }

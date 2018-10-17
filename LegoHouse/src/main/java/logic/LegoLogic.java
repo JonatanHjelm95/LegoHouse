@@ -15,7 +15,7 @@ import java.util.HashMap;
  */
 public class LegoLogic {
 
-    public Stykliste createHouse(int height, int lenX, int lenY) {
+    public Stykliste createHouse(int height, int lenX, int lenY) throws ArrayIndexOutOfBoundsException {
         Stykliste hus = new Stykliste();
         for (int i = 0; i < height; i++) {
             String layerName = "layer " + (i + 1);
@@ -29,7 +29,7 @@ public class LegoLogic {
         return hus;
     }
 
-    public ArrayList<Brick[]> createEvenLayer(int lenX, int lenY) {
+    public ArrayList<Brick[]> createEvenLayer(int lenX, int lenY) throws ArrayIndexOutOfBoundsException {
         ArrayList<Brick[]> house = new ArrayList<Brick[]>();
         //side1-----------------------------------------
         int brickCount = 0;
@@ -202,7 +202,7 @@ public class LegoLogic {
         return house;
     }
 
-    public ArrayList<Brick[]> createUnevenLayer(int lenX, int lenY) {
+    public ArrayList<Brick[]> createUnevenLayer(int lenX, int lenY) throws ArrayIndexOutOfBoundsException {
         ArrayList<Brick[]> house = new ArrayList<Brick[]>();
 
         //side1-----------------------------------------

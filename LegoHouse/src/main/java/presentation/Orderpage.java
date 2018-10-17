@@ -7,17 +7,22 @@ package presentation;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import logic.HTMLGenerator;
 import logic.LoginSampleException;
 
 /**
  *
  * @author Jonatan
  */
-public class Orderpage extends Command{
+public class Orderpage extends Command {
+
+    private HTMLGenerator gen = new HTMLGenerator();
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        request.setAttribute("menu", gen.generateMenu(request));
+
+        return "orderpage";
     }
-    
+
 }

@@ -52,7 +52,7 @@ public class FrontController extends HttpServlet {
             request.setAttribute("menu", gen.generateMenu(request));
             Command action = Command.from(request);
             String view = action.execute(request, response);
-            if (view == "index") {
+            if (view.equals("index")) {
                 request.getRequestDispatcher(view + ".jsp").forward(request, response);
             } else {
                 request.getRequestDispatcher("/WEB-INF/" + view + ".jsp").forward(request, response);
