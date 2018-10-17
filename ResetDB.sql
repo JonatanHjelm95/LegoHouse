@@ -11,7 +11,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- -----------------------------------------------------
 -- Schema mydb
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
+CREATE SCHEMA IF NOT EXISTS `LegoDB` DEFAULT CHARACTER SET utf8 ;
 -- -----------------------------------------------------
 -- Schema LegoDB
 -- -----------------------------------------------------
@@ -31,6 +31,7 @@ CREATE TABLE IF NOT EXISTS `LegoDB`.`user` (
   `id` INT(11) NOT NULL AUTO_INCREMENT,
   `email` VARCHAR(90) NOT NULL,
   `password` VARCHAR(45) NOT NULL,
+   `role` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `email_UNIQUE` (`email` ASC))
 ENGINE = InnoDB

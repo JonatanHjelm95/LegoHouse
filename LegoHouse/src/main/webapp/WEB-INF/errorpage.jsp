@@ -14,5 +14,6 @@
     <body>
         <%=request.getAttribute("menu")%>
         <h1> <%=request.getAttribute("error")%></h1>
+        <h1> <%=request.getAttribute("msg")%></h1>
     </body>
 </html>

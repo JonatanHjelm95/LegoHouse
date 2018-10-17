@@ -19,7 +19,8 @@
         <title>index</title>
     </head>
     <body>
-        <div class="topnav">
+        <%=request.getAttribute("menu")%>
+        <!-- <div class="topnav">
         <form id="Home" action="FrontController" method="POST">
             <input type="hidden" name="command" value="home">
             <input id="btn" class="active" type="submit" value="Home">
@@ -36,6 +37,7 @@
             <input type="hidden" name="command" value="loginpage">
             <input id="btn" type="submit" value="Login">
         </form>
-        </div>
+        </div> -->
+        
     </body>
 </html>

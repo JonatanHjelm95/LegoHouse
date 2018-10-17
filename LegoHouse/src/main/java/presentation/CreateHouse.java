@@ -5,6 +5,7 @@
  */
 package presentation;
 
+import data.User;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import logic.LoginSampleException;
@@ -20,7 +21,12 @@ public class CreateHouse extends Command {
 
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
-        return "createHouse";
+        User user = null;
+        user = (User) request.getSession(false).getAttribute("user");
+        if (user != null) {
+            return "createHouse";
+        }
+        return "loginpage";
     }
-    
+
 }

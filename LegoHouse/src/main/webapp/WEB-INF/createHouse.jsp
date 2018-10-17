@@ -19,7 +19,8 @@
         <title>Create House</title>
     </head>
     <body>
-        <div class="topnav">
+        <%=request.getAttribute("menu")%>
+        <!--<div class="topnav">
             <form id="Home" action="FrontController" method="POST">
                 <input type="hidden" name="command" value="home">
                 <input id="btn" type="submit" value="Home">
@@ -36,7 +37,7 @@
                 <input type="hidden" name="command" value="loginpage">
                 <input id="btn" type="submit" value="Login">
             </form>
-        </div>
+        </div>-->
 
         <form action="FrontController" method="POST">
             <input type="hidden" name="command" value="houseDetails">
@@ -49,7 +50,7 @@
             Length Y:<br>
             <input type="text" name="lenY" placeholder="minimum 3">
             <br>
-            <input type="submit" value="Submit">
+            <input type="submit" value="View Order">
         </form>
     </body>
 </html>

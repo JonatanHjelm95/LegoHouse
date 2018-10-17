@@ -49,9 +49,9 @@ public class FrontController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, LoginSampleException {
         try {
+            request.setAttribute("menu", gen.generateMenu(request));
             Command action = Command.from(request);
             String view = action.execute(request, response);
-            gen.topMenu(request);
             if (view == "index") {
                 request.getRequestDispatcher(view + ".jsp").forward(request, response);
             } else {

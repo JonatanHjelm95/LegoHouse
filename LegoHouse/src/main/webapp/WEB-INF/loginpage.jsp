@@ -19,7 +19,8 @@
         <title>loginpage</title>
     </head>
     <body>
-        <div class="topnav">
+        <%=request.getAttribute("menu")%>
+        <!--<div class="topnav">
             <form id="Home" action="FrontController" method="POST">
                 <input type="hidden" name="command" value="home">
                 <input id="btn" type="submit" value="Home">
@@ -36,10 +37,10 @@
                 <input type="hidden" name="command" value="loginpage">
                 <input id="btn" class="active" type="submit" value="Login">
             </form>
-        </div>
+        </div>-->
 
         <form action="FrontController" method="POST">
-            <input type="hidden" name="origin" value="validate user">
+            <input type="hidden" name="command" value="login">
             Email:<br>
             <input type="text" name="email" placeholder="email">
             <br>

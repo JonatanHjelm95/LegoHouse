@@ -7,6 +7,7 @@ package presentation;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import logic.HTMLGenerator;
 import logic.LoginSampleException;
 
@@ -14,18 +15,17 @@ import logic.LoginSampleException;
  *
  * @author Jonatan
  */
-public class Loginpage extends Command {
+public class Logout extends Command {
 
     private HTMLGenerator gen = new HTMLGenerator();
 
-    public Loginpage() {
-    }
-
     @Override
     String execute(HttpServletRequest request, HttpServletResponse response) throws LoginSampleException {
+        HttpSession session = request.getSession();
+        session.invalidate();
         request.setAttribute("menu", gen.generateMenu(request));
 
-        return "loginpage";
+        return "index";
     }
 
 }

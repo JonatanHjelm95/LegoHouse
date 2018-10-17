@@ -382,5 +382,9 @@ public class LegoLogic {
         house.add(side4Trim);
         return house;
     }
+    
+    public int getHousePrice(Stykliste dav){
+        return 0;
+    }
 }
 

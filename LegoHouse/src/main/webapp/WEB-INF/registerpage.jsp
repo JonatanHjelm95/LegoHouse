@@ -19,7 +19,8 @@
         <title>register Page</title>
     </head>
     <body>
-        <div class="topnav">
+        <%=request.getAttribute("menu")%>
+        <!--<div class="topnav">
             <form id="Home" action="FrontController" method="POST">
                 <input type="hidden" name="command" value="home">
                 <input id="btn" type="submit" value="Home">
@@ -36,18 +37,18 @@
                 <input type="hidden" name="command" value="loginpage">
                 <input id="btn" type="submit" value="Login">
             </form>
-        </div>
+        </div> -->
 
         <form name="register" action="FrontController" method="POST">
             <input type="hidden" name="command" value="register">
             Email:<br>
-            <input type="text" name="email" value="someone@nowhere.com">
+            <input type="text" name="email" placeholder="email">
             <br>
             Password:<br>
-            <input type="password" name="password1" value="sesam">
+            <input type="password" name="password1" placeholder="password">
             <br>
             Retype Password:<br>
-            <input type="password" name="password2" value="sesam">
+            <input type="password" name="password2" placeholder="confirm password">
             <br>
             <input type="submit" value="Submit">
         </form>

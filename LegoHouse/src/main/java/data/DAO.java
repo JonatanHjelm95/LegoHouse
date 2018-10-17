@@ -18,17 +18,37 @@ import logic.LoginSampleException;
  */
 public class DAO {
 
-    private static final String NEW_USER = "INSERT INTO user (email, password) VALUES (?, ?)";
+    private static final String NEW_USER = "INSERT INTO user (email, password, role) VALUES (?, ?, ?)";
+    private static final String ADMIN_USER = "INSERT INTO user (email, password, role) VALUES (?, ?, ?)";
     private static final String USER_LOGIN = "SELECT * FROM user WHERE email=? AND password=?";
     private static final String GET_USER = "SELECT * FROM LegoDB.user where email =?;";
 
     public static void createUser(User user) {
+//        while (!user.getPassword().isEmpty() && !user.getEmail().isEmpty()) {
+            try {
+                Connection con = Connector.connection();
+                PreparedStatement ps = con.prepareStatement(NEW_USER, Statement.RETURN_GENERATED_KEYS);
+                ps.setString(1, user.getEmail());
+                ps.setString(2, user.getPassword());
+                ps.setString(3, user.getRole());
+                ps.executeUpdate();
+                ResultSet ids = ps.getGeneratedKeys();
+                ids.next();
+                int id = ids.getInt(1);
+                user.setId(id);
+            } catch (SQLException | ClassNotFoundException ex) {
+                ex.printStackTrace();
+            }
+//        }
+    }
+
+    public static void createAdmin(User user) {
         try {
             Connection con = Connector.connection();
-            PreparedStatement ps = con.prepareStatement(NEW_USER, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = con.prepareStatement(ADMIN_USER, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, user.getEmail());
             ps.setString(2, user.getPassword());
-//            ps.setString(3, user.getRole());
+            ps.setString(3, "Employee");
             ps.executeUpdate();
             ResultSet ids = ps.getGeneratedKeys();
             ids.next();
@@ -40,25 +60,30 @@ public class DAO {
     }
 
     public static User login(String email, String password) throws LoginSampleException {
-        try {
-            Connection con = Connector.connection();
-            PreparedStatement ps = con.prepareStatement(USER_LOGIN);
-            ps.setString(1, email);
-            ps.setString(2, password);
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                int id = rs.getInt("id");
-                String em = rs.getString("email");
-                String pwrd = rs.getString("password");
-                if (email.equals(em) && password.equals(pwrd)) {
-                    User user = new User(email, password);
-                    user.setId(id);
-                    return user;
+//        while (!email.isEmpty() && !password.isEmpty()) {
+            try {
+                Connection con = Connector.connection();
+                PreparedStatement ps = con.prepareStatement(USER_LOGIN);
+                ps.setString(1, email);
+                ps.setString(2, password);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    int id = rs.getInt("id");
+                    String em = rs.getString("email");
+                    String pwrd = rs.getString("password");
+                    String role = rs.getString("role");
+
+                    if (email.equals(em) && password.equals(pwrd)) {
+                        User user = new User(email, password, role);
+                        user.setId(id);
+                        return user;
+                    }
                 }
+
+            } catch (ClassNotFoundException | SQLException ex) {
+                ex.printStackTrace();
             }
-        } catch (ClassNotFoundException | SQLException ex) {
-            ex.printStackTrace();
-        }
+//        }
         return null;
     }
 
@@ -72,7 +97,8 @@ public class DAO {
                 int id = rs.getInt("id");
                 String em = rs.getString("email");
                 String pwrd = rs.getString("password");
-                User user = new User(em, pwrd);
+                String role = rs.getString("role");
+                User user = new User(em, pwrd, role);
                 user.setId(id);
                 return user;
             } else {

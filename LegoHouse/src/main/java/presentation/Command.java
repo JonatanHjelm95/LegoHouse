@@ -4,10 +4,12 @@ import logic.LoginSampleException;
 import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import logic.HTMLGenerator;
 
 abstract class Command {
 
     private static HashMap<String, Command> commands;
+    private HTMLGenerator gen;
 
     private static void initCommands() {
         commands = new HashMap<>();
@@ -17,6 +19,8 @@ abstract class Command {
         commands.put("loginpage", new Loginpage());
         commands.put("Home", new Indexpage());
         commands.put("createHouse", new CreateHouse());
+        commands.put("logout", new Logout());
+        commands.put("orderpage", new Orderpage());
     }
 
     static Command from(HttpServletRequest request) {

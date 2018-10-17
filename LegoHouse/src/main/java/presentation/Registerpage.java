@@ -7,6 +7,7 @@ package presentation;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import logic.HTMLGenerator;
 import logic.LoginSampleException;
 
 /**
@@ -14,6 +15,8 @@ import logic.LoginSampleException;
  * @author Jonatan
  */
 public class Registerpage extends Command {
+
+    private HTMLGenerator gen = new HTMLGenerator();
 
     public Registerpage() {
     }

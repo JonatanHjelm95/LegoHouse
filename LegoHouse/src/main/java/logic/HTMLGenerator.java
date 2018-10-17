@@ -32,7 +32,7 @@ public class HTMLGenerator {
             + "            <input id=\"btn\" type=\"submit\" value=\"Login\">\n"
             + "        </form>\n"
             + "        </div>";
-    
+
     String active = "class=\"active\"";
 
     String home = "<form id=\"Home\" action=\"FrontController\" method=\"POST\">\n"
@@ -51,48 +51,35 @@ public class HTMLGenerator {
             + "            <input type=\"hidden\" name=\"command\" value=\"loginpage\">\n"
             + "            <input id=\"btn\" type=\"submit\" value=\"Login\">\n"
             + "        </form>";
+    String logout = "<form id=\"logout\" action=\"FrontController\" method=\"POST\">\n"
+            + "            <input type=\"hidden\" name=\"command\" value=\"logout\">\n"
+            + "            <input id=\"btn\" type=\"submit\" value=\"Logout\">\n"
+            + "        </form>";
 
     public String generateMenu(HttpServletRequest request) {
-        User user = null;
+        User user;
         if (request.getSession(false) != null) {
             try {
                 user = (User) request.getSession(false).getAttribute("user");
-                return "<div class=\"topnav\">\n"
-                        + "<a id=\"login\" href=\"?origin=logout\">logout</a>"
-                        + "<h4 id=\"user\" > Logged in as: " + user.getEmail() + "</h4>\n"
-                        + "<h1 id=\"header\" >Lego house</h1>\n"
-                        + "<a id=\"home\" class=\"active\" href=\"?origin=index\">Home</a>\n"
-                        + "<a id=\"products\" href=\"?origin=products\">Products</a>\n"
-                        + "</div>";
+                if (user.getEmail() != null) {
+                    return "<!-- Logged In --><div class=\"topnav\">\n"
+                            + home + "\n"
+                            + createHouse + "\n"
+                            + logout + "\n"
+                            + "<h5>Logged in as: " + user.getEmail() + "</h5>\n"
+                            + "</div>";
+                }
             } catch (NullPointerException ne) {
                 ne.printStackTrace();
             }
 
         }
-        return "<div class=\"topnav\">\n"
-                + "        <form id=\"Home\" action=\"FrontController\" method=\"POST\">\n"
-                + "            <input type=\"hidden\" name=\"command\" value=\"home\">\n"
-                + "            <input id=\"btn\" type=\"submit\" value=\"Home\">\n"
-                + "        </form>\n"
-                + "        <form id=\"createHouse\" action=\"FrontController\" method=\"POST\">\n"
-                + "            <input type=\"hidden\" name=\"command\" value=\"createHouse\">\n"
-                + "            <input id=\"btn\" type=\"submit\" value=\"Create House\">\n"
-                + "        </form>\n"
-                + "        <form id=\"register\" action=\"FrontController\" method=\"POST\">\n"
-                + "            <input type=\"hidden\" name=\"command\" value=\"registerpage\">\n"
-                + "            <input id=\"btn\" type=\"submit\" value=\"Register\">\n"
-                + "        </form>\n"
-                + "        <form id=\"login\" action=\"FrontController\" method=\"POST\">\n"
-                + "            <input type=\"hidden\" name=\"command\" value=\"loginpage\">\n"
-                + "            <input id=\"btn\" type=\"submit\" value=\"Login\">\n"
-                + "        </form>\n"
-                + "        </div>";
-    }
-    
-    public String topMenu(HttpServletRequest request){
-        String menu = "<div class=\"topnav\">\n";
-        System.out.println(">>>" + request.getPathTranslated()+ "<<<");
-        return null;
+        return "<!--Not Logged In --><div class=\"topnav\">\n"
+                + home + "\n"
+                + createHouse + "\n"
+                + login + "\n"
+                + register + "\n"
+                + "</div>";
     }
 
 }

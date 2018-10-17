@@ -16,6 +16,7 @@ public class UnknownCommand extends Command {
     String execute( HttpServletRequest request, HttpServletResponse response ) throws LoginSampleException {
         String msg = "Unknown command. Contact IT";
         throw new LoginSampleException( msg );
+        
     }
 
 }
